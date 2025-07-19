@@ -34,8 +34,8 @@ app/
 │   │   ├── BloodGlucoseRepository.kt
 │   │   └── BloodGlucoseRepositoryImpl.kt
 │   ├── network/
-│   │   ├── WelbyApiService.kt
-│   │   ├── WelbyScrapingService.kt
+│   │   ├── ESMBGApiService.kt
+│   │   ├── ESMBGScrapingService.kt
 │   │   └── dto/
 │   ├── database/
 │   │   ├── BloodGlucoseDao.kt
@@ -72,7 +72,8 @@ data class BloodGlucoseReading(
     val timestamp: LocalDateTime,
     val valueMgDl: Double,
     val valueMMolL: Double = valueMgDl * 0.0555,
-    val source: String = "welby",
+    val measurementTime: LocalTime? = null, // 詳細な測定時刻（e-SMBGから取得）
+    val source: String = "e-smbg",
     val syncedToHealthConnect: Boolean = false
 )
 
@@ -83,6 +84,8 @@ data class BloodGlucoseEntity(
     val timestamp: Long,
     val valueMgDl: Double,
     val valueMMolL: Double,
+    val measurementTimeHour: Int?, // 時刻情報の時間部分
+    val measurementTimeMinute: Int?, // 時刻情報の分部分
     val source: String,
     val syncedToHealthConnect: Boolean
 )
@@ -92,14 +95,14 @@ data class BloodGlucoseEntity(
 
 ```kotlin
 interface BloodGlucoseRepository {
-    suspend fun fetchFromWelby(): List<BloodGlucoseReading>
+    suspend fun fetchFromESMBG(): List<BloodGlucoseReading>
     suspend fun saveToLocal(readings: List<BloodGlucoseReading>)
     suspend fun getUnsyncedReadings(): List<BloodGlucoseReading>
     suspend fun markAsSynced(readingIds: List<String>)
 }
 
 class BloodGlucoseRepositoryImpl(
-    private val welbyService: WelbyScrapingService,
+    private val esmhgService: ESMBGScrapingService,
     private val dao: BloodGlucoseDao,
     private val healthConnectManager: HealthConnectManager
 ) : BloodGlucoseRepository {
@@ -116,9 +119,9 @@ class BloodGlucoseRepositoryImpl(
    ↓
 2. SyncUseCase.execute()
    ↓
-3. Repository.fetchFromWelby()
+3. Repository.fetchFromESMBG()
    ↓
-4. WelbyScrapingService.scrapeData()
+4. ESMBGScrapingService.scrapeData()
    ↓
 5. Repository.saveToLocal()
    ↓
@@ -176,11 +179,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideBloodGlucoseRepository(
-        welbyService: WelbyScrapingService,
+        esmhgService: ESMBGScrapingService,
         dao: BloodGlucoseDao,
         healthConnectManager: HealthConnectManager
     ): BloodGlucoseRepository = BloodGlucoseRepositoryImpl(
-        welbyService, dao, healthConnectManager
+        esmhgService, dao, healthConnectManager
     )
 }
 ```
@@ -214,7 +217,7 @@ class SyncViewModel : ViewModel() {
 
 ```kotlin
 class SecureCredentialManager(private val context: Context) {
-    private val keyAlias = "welby_credentials"
+    private val keyAlias = "esmg_credentials"
 
     fun saveCredentials(username: String, password: String) {
         // Android Keystore を使用した暗号化保存
@@ -248,20 +251,20 @@ val okHttpClient = OkHttpClient.Builder()
 
 ```kotlin
 class BloodGlucoseRepositoryTest {
-    @Mock private lateinit var welbyService: WelbyScrapingService
+    @Mock private lateinit var esmhgService: ESMBGScrapingService
     @Mock private lateinit var dao: BloodGlucoseDao
     @Mock private lateinit var healthConnectManager: HealthConnectManager
 
     private lateinit var repository: BloodGlucoseRepository
 
     @Test
-    fun `fetchFromWelby should return parsed readings`() = runTest {
+    fun `fetchFromESMBG should return parsed readings`() = runTest {
         // Given
         val mockHtml = "<html>...</html>"
-        whenever(welbyService.scrapeData()).thenReturn(mockHtml)
+        whenever(esmhgService.scrapeData()).thenReturn(mockHtml)
 
         // When
-        val result = repository.fetchFromWelby()
+        val result = repository.fetchFromESMBG()
 
         // Then
         assertThat(result).isNotEmpty()

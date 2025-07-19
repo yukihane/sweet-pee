@@ -36,16 +36,16 @@ dependencies {
 
 ### 現在の状況
 
-- **Android Studio**: 未セットアップ（要インストール）
-- **エミュレータ**: 未準備（開発時に使用予定）
+- **Android Studio**: ✅ セットアップ済み（JetBrains Toolbox経由）
+- **エミュレータ**: ✅ 動作確認済み（Hello Worldアプリ実行済み）
 - **実機**: 利用可能（最終テスト用）
-- **開発経験**: Kotlin（サーバーサイド）経験あり、Android開発は未経験
+- **開発経験**: Kotlin（サーバーサイド）経験あり、Android開発学習中
 
-### セットアップ要件
+### セットアップ済み項目
 
-- Android Studio最新版
-- Android SDK設定
-- エミュレータ作成（API 34推奨、Google Play Services対応）
+- Android Studio最新版（JetBrains Toolbox管理）
+- Android SDK設定完了
+- エミュレータ動作確認完了（API 26対応）
 
 ## 技術的制約
 
