@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧 - テーブル形式</title>
+</head>
+<body>
+    <h1>商品一覧（テーブル形式）</h1>
+    
+    <table border="1" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>商品ID</th>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>在庫</th>
+                <th>カテゴリ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-product-id="101">
+                <td>101</td>
+                <td class="item-name">ワイヤレスヘッドホン</td>
+                <td class="item-price">¥15,800</td>
+                <td class="stock-count">25</td>
+                <td class="category">電子機器</td>
+            </tr>
+            <tr data-product-id="102">
+                <td>102</td>
+                <td class="item-name">スマートフォンケース</td>
+                <td class="item-price">¥2,300</td>
+                <td class="stock-count">150</td>
+                <td class="category">アクセサリー</td>
+            </tr>
+            <tr data-product-id="103">
+                <td>103</td>
+                <td class="item-name">USB充電器</td>
+                <td class="item-price">¥3,500</td>
+                <td class="stock-count">80</td>
+                <td class="category">電子機器</td>
+            </tr>
+            <tr data-product-id="104">
+                <td>104</td>
+                <td class="item-name">Bluetoothスピーカー</td>
+                <td class="item-price">¥8,900</td>
+                <td class="stock-count">12</td>
+                <td class="category">電子機器</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="pagination">
+        <a href="?page=1" class="page-link current">1</a>
+        <a href="?page=2" class="page-link">2</a>
+        <a href="?page=3" class="page-link">3</a>
+        <span class="page-info">全120件中 1-4件表示</span>
+    </div>
+    
+    <form method="GET" action="/products">
+        <label for="search">商品検索:</label>
+        <input type="text" id="search" name="q" placeholder="商品名を入力">
+        <select name="category">
+            <option value="">全カテゴリ</option>
+            <option value="electronics">電子機器</option>
+            <option value="accessories">アクセサリー</option>
+        </select>
+        <button type="submit">検索</button>
+    </form>
+</body>
+</html>
