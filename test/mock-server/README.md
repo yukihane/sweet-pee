@@ -6,13 +6,13 @@
 
 ```bash
 # 依存関係インストール
-npm install
+pnpm install
 
 # サーバー起動
-npm start
+pnpm start
 
 # 開発モード（自動再起動）
-npm run dev
+pnpm run dev
 ```
 
 ## テスト
