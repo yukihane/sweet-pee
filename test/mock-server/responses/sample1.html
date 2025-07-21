@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サンプルページ - モックサーバー</title>
+    <meta name="description" content="スクレイピングテスト用のサンプルページです">
+</head>
+<body>
+    <header>
+        <h1>モックサーバー サンプルページ</h1>
+        <nav>
+            <ul>
+                <li><a href="/">ホーム</a></li>
+                <li><a href="/products">商品一覧</a></li>
+                <li><a href="/api/data">API</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="content">
+            <h2>商品情報</h2>
+            <div class="product-list">
+                <div class="product-item" data-id="1">
+                    <h3 class="product-name">サンプル商品A</h3>
+                    <p class="product-price">¥1,200</p>
+                    <p class="product-description">これはテスト用の商品説明文です。</p>
+                </div>
+                <div class="product-item" data-id="2">
+                    <h3 class="product-name">サンプル商品B</h3>
+                    <p class="product-price">¥2,500</p>
+                    <p class="product-description">スクレイピングテスト用の商品です。</p>
+                </div>
+                <div class="product-item" data-id="3">
+                    <h3 class="product-name">サンプル商品C</h3>
+                    <p class="product-price">¥850</p>
+                    <p class="product-description">価格とタイトルの抽出テスト用です。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Mock Server. Test purposes only.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "status": "success",
+  "data": {
+    "products": [
+      {
+        "id": 1,
+        "name": "ワイヤレスイヤホン",
+        "price": 12800,
+        "category": "electronics",
+        "inStock": true,
+        "rating": 4.5,
+        "reviews": 156
+      },
+      {
+        "id": 2,
+        "name": "スマートウォッチ",
+        "price": 25600,
+        "category": "electronics", 
+        "inStock": false,
+        "rating": 4.2,
+        "reviews": 89
+      },
+      {
+        "id": 3,
+        "name": "ポータブル充電器",
+        "price": 4800,
+        "category": "accessories",
+        "inStock": true,
+        "rating": 4.7,
+        "reviews": 234
+      }
+    ],
+    "pagination": {
+      "currentPage": 1,
+      "totalPages": 5,
+      "totalItems": 48,
+      "itemsPerPage": 10
+    }
+  },
+  "timestamp": "2024-01-15T10:30:00Z",
+  "version": "1.0"
+}

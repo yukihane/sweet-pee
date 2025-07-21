@@ -1,0 +1,38 @@
+{
+  "/": {
+    "responseFile": "responses/sample1.html",
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Server": "Mock-Server",
+      "Cache-Control": "no-cache"
+    },
+    "statusCode": 200,
+    "delay": 0
+  },
+  "/products": {
+    "responseFile": "responses/sample2.html",
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Custom-Header": "product-page"
+    },
+    "statusCode": 200,
+    "delay": 100
+  },
+  "/api/data": {
+    "responseFile": "responses/api_data.json",
+    "headers": {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "statusCode": 200,
+    "delay": 50
+  },
+  "/error": {
+    "responseFile": "responses/error404.html",
+    "headers": {
+      "Content-Type": "text/html; charset=utf-8"
+    },
+    "statusCode": 404,
+    "delay": 0
+  }
+}
